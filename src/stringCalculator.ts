@@ -1,9 +1,20 @@
 export class StringCalculator {
     private callCount = 0;
 
+    // Step 8: Event handler field
+    private addOccurredHandlers: ((input: string, result: number) => void)[] = [];
+
+    // Method to subscribe to the event
+    public onAddOccurred(handler: (input: string, result: number) => void): void {
+        this.addOccurredHandlers.push(handler);
+    }
+
     add(input: string): number {
         this.callCount++;
-        if (!input) return 0;
+        if (!input) {
+            this.triggerAddOccurred(input, 0);
+            return 0;
+        }
 
         let delimiter = /,|\n/;
         if (input.startsWith("//")) {
@@ -20,7 +31,17 @@ export class StringCalculator {
         if (negatives.length) {
             throw new Error(`negatives not allowed: ${negatives.join(',')}`);
         }
-        return nums.reduce((a, b) => a + (b <= 1000 ? b : 0), 0);
+
+        const result = nums.reduce((a, b) => a + (b <= 1000 ? b : 0), 0);
+
+        // Step 8: Trigger the event
+        this.triggerAddOccurred(input, result);
+
+        return result;
+    }
+
+    private triggerAddOccurred(input: string, result: number) {
+        this.addOccurredHandlers.forEach(handler => handler(input, result));
     }
 
     getCalledCount(): number {

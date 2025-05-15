@@ -45,3 +45,21 @@ test('Step 7: track number of calls', () => {
   calculator.add("2");
   expect(calculator.getCalledCount()).toBe(2);
 });
+
+
+test('Step 8: AddOccurred event is triggered with correct input and result', () => {
+  const calc = new StringCalculator();
+
+  let capturedInput: string | null = null;
+  let capturedResult: number | null = null;
+
+  calc.onAddOccurred((input, result) => {
+      capturedInput = input;
+      capturedResult = result;
+  });
+
+  const result = calc.add("1,2,3");
+
+  expect(capturedInput).toBe("1,2,3");
+  expect(capturedResult).toBe(result);
+});
