@@ -16,6 +16,10 @@ export class StringCalculator {
         }
 
         const nums = input.split(delimiter).map(Number);
-        return nums.reduce((a, b) => a + b, 0);
+        const negatives = nums.filter(n => n < 0);
+        if (negatives.length) {
+            throw new Error(`negatives not allowed: ${negatives.join(',')}`);
+        }
+        return nums.reduce((a, b) => a + (b <= 1000 ? b : 0), 0);
     }
 }

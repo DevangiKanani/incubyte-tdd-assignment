@@ -33,3 +33,8 @@ test('Step 3: handle newlines as delimiters', () => {
 test('Step 4: support custom delimiter', () => {
   expect(calculator.add("//;\n1;2")).toBe(3);
 });
+
+// ============ throws on negatives ============= \\
+test('Step 5/6: throws on negatives', () => {
+  expect(() => calculator.add("1,-2,-3")).toThrow("negatives not allowed: -2,-3");
+});
