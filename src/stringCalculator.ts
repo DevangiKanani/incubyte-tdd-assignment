@@ -22,4 +22,8 @@ export class StringCalculator {
         }
         return nums.reduce((a, b) => a + (b <= 1000 ? b : 0), 0);
     }
+
+    getCalledCount(): number {
+        return this.callCount;
+    }
 }

@@ -38,3 +38,10 @@ test('Step 4: support custom delimiter', () => {
 test('Step 5/6: throws on negatives', () => {
   expect(() => calculator.add("1,-2,-3")).toThrow("negatives not allowed: -2,-3");
 });
+
+// ============ throws on negatives ============= \\
+test('Step 7: track number of calls', () => {
+  calculator.add("1");
+  calculator.add("2");
+  expect(calculator.getCalledCount()).toBe(2);
+});
