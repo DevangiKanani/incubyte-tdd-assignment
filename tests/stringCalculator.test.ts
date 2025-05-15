@@ -68,3 +68,8 @@ test('Step 8: AddOccurred event is triggered with correct input and result', () 
 test('Step 9: ignore numbers > 1000', () => {
   expect(calculator.add("2,1001")).toBe(2);
 });
+
+// ============ delimiter of any length ============= \\
+test('Step 10: delimiter of any length', () => {
+  expect(calculator.add("//[***]\n1***2***3")).toBe(6);
+});

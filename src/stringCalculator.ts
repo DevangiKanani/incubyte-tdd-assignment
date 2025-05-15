@@ -18,9 +18,13 @@ export class StringCalculator {
 
         let delimiter = /,|\n/;
         if (input.startsWith("//")) {
-            const match = input.match(/^\/\/(.+)\n(.*)/);
+            const match = input.match(/^\/\/(\[.*?\])+\n/);
             if (match) {
-                const [, delim, rest] = match;
+                const delimList = [...input.matchAll(/\[(.*?)\]/g)].map(m => m[1]);
+                delimiter = new RegExp(delimList.map(d => d.replace(/[-/\\^$*+?.()|[\]{}]/g, '\\$&')).join('|'));
+                input = input.slice(match[0].length);
+            } else {
+                const [_, delim, rest] = input.match(/^\/\/(.)\n(.*)/)!;
                 delimiter = new RegExp(`[${delim}]`);
                 input = rest;
             }
