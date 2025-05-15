@@ -7,7 +7,6 @@ beforeEach(() => {
 });
 
 // ============ Handle 0, 1, or 2 numbers ============= \\
-
 test('Step 1: empty string returns 0', () => {
   expect(calculator.add("")).toBe(0);
 });
@@ -21,7 +20,11 @@ test('Step 1: two numbers are added', () => {
 });
 
 // ============ handle multiple numbers ============= \\
-
 test('Step 2: handle multiple numbers', () => {
   expect(calculator.add("1,2,3,4")).toBe(10);
+});
+
+// ============ handle newlines as delimiters ============= \\
+test('Step 3: handle newlines as delimiters', () => {
+  expect(calculator.add("1\n2,3")).toBe(6);
 });
