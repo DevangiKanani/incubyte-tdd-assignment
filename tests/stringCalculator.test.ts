@@ -46,7 +46,7 @@ test('Step 7: track number of calls', () => {
   expect(calculator.getCalledCount()).toBe(2);
 });
 
-
+// ============ AddOccurred event is triggered with correct input and result ============= \\
 test('Step 8: AddOccurred event is triggered with correct input and result', () => {
   const calc = new StringCalculator();
 
@@ -62,4 +62,9 @@ test('Step 8: AddOccurred event is triggered with correct input and result', () 
 
   expect(capturedInput).toBe("1,2,3");
   expect(capturedResult).toBe(result);
+});
+
+// ============ ignore numbers > 1000 ============= \\
+test('Step 9: ignore numbers > 1000', () => {
+  expect(calculator.add("2,1001")).toBe(2);
 });
