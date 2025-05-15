@@ -73,3 +73,13 @@ test('Step 9: ignore numbers > 1000', () => {
 test('Step 10: delimiter of any length', () => {
   expect(calculator.add("//[***]\n1***2***3")).toBe(6);
 });
+
+// ============ multiple delimiters ============= \\
+test('Step 11: multiple delimiters', () => {
+  expect(calculator.add("//[*][%]\n1*2%3")).toBe(6);
+});
+
+// ============ Step 12: multi-length delimiters ============= \\
+test('Step 12: multi-length delimiters', () => {
+  expect(calculator.add("//[**][%%]\n1**2%%3")).toBe(6);
+});
