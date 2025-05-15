@@ -28,3 +28,8 @@ test('Step 2: handle multiple numbers', () => {
 test('Step 3: handle newlines as delimiters', () => {
   expect(calculator.add("1\n2,3")).toBe(6);
 });
+
+// ============ support custom delimiter ============= \\
+test('Step 4: support custom delimiter', () => {
+  expect(calculator.add("//;\n1;2")).toBe(3);
+});

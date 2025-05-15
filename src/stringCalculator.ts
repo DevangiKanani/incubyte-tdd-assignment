@@ -4,8 +4,18 @@ export class StringCalculator {
     add(input: string): number {
         this.callCount++;
         if (!input) return 0;
-        const sanitized = input.replace(/\n/g, ',');
-        const nums = sanitized.split(',').map(Number);
+
+        let delimiter = /,|\n/;
+        if (input.startsWith("//")) {
+            const match = input.match(/^\/\/(.+)\n(.*)/);
+            if (match) {
+                const [, delim, rest] = match;
+                delimiter = new RegExp(`[${delim}]`);
+                input = rest;
+            }
+        }
+
+        const nums = input.split(delimiter).map(Number);
         return nums.reduce((a, b) => a + b, 0);
     }
 }
